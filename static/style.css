@@ -63,14 +63,16 @@ header {
     display: flex;
     flex-direction: column;
     max-width: 70%;
-    min-width: 20%;
+    min-width: 200px;
     border-radius: 20px;
     font-size: 17px;
     word-wrap: break-word;
     white-space: pre-wrap;
+    padding: 0 10px;
 }
 
 .left {
+    flex-direction: row !important;
     align-self: flex-start;
     background: var(--msg-left-bg);
     color: var(--text-color);
@@ -82,14 +84,33 @@ header {
     color: var(--msg-right-color);
 }
 
+.avatar {
+    width: 50px;
+    height: 50px;
+    background: var(--header-bg);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color: white;
+    text-transform: capitalize;
+    align-self: center;
+}
+
+.message {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-left: 10px;
+}
+
 .sender {
     font-size: 14px;
     font-weight: bold;
     margin-bottom: 5px;
-    background: var(--header-bg);
     padding: 5px 10px;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
+    text-transform: capitalize;
 }
 
 .content {
@@ -162,4 +183,17 @@ form button:active svg {
 .exit:hover {
     transform: scale(1.1);
     background: var(--field-bg);
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(90deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+button.sending svg {
+    animation: spin 1s linear infinite;
 }

@@ -19,3 +19,21 @@ const server = http.createServer((req, res) => {
 })
 
 server.listen(3000);
+
+const { Server } = require("socket.io");
+const io = new Server(server);
+
+io.on("connection", socket => {
+    console.log("A user connected. Id: " + socket.id);
+    socket.on("new_message", message => {
+        let date = new Date();
+        let hours = String(date.getHours()).padStart(2, "0");
+        let minutes = String(date.getMinutes()).padStart(2, "0");
+        let time = hours + ":" + minutes;
+        io.emit("message", JSON.stringify({
+            "sender": "Admin",
+            "text": message,
+            "time": time
+        }))
+    })
+})
