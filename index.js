@@ -1,6 +1,7 @@
 let http = require("http");
 let fs = require("fs");
 let path = require("path");
+let db = require("./database");
 
 let indexHtmlFile = fs.readFileSync(path.join(__dirname, "static", "index.html"));
 let styleFile = fs.readFileSync(path.join(__dirname, "static", "style.css"));
