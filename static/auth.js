@@ -23,10 +23,14 @@ loginForm.addEventListener("submit", event => {
         let data = await response.json();
         if (response.status == 200) {
             const token = data.token;
+            /*let days = 3;
+            let expiresDate = new Date();
+            expiresDate.setTime(expiresDate.getTime() + (days * 24 * 60 * 60 * 1000));
+            document.cookie = `token=${token}; expires=${expiresDate.toString()}`;*/
             document.cookie = `token=${token}`;
             window.location.assign("/");
         } else {
-            alert(data.error);
+            alertify.error(data.error);
         }
     })
 })
@@ -35,7 +39,7 @@ registerForm.addEventListener("submit", event => {
     event.preventDefault();
     const { login, password, cpassword } = registerForm;
     if (password.value != cpassword.value) {
-        return alert("Passwords not match")
+        return alertify.error("Passwords not match")
     }
     const user = {
         login: login.value,
@@ -47,10 +51,10 @@ registerForm.addEventListener("submit", event => {
     }).then(async response => {
         let data = await response.json();
         if (response.status == 201) {
-            alert("Register success");
+            alertify.success("Register success");
             showForm("login");
         } else {
-            alert(data.error);
+            alertify.error(data.error);
         }
     })
 })
